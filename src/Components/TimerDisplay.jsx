@@ -6,6 +6,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import Box from '@mui/material/Box';
 
 const TimerDisplay = () => {
+  
   return (
     <Stack>
       <p className="timer-label">Session</p>
