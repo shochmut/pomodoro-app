@@ -3,21 +3,21 @@ import './App.css';
 import Stack from '@mui/material/Stack';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import IconButton from '@mui/material/IconButton';
+import BreakDisplay from "./Components/BreakDisplay.jsx";
+import SessionDisplay from './Components/SessionDisplay.jsx';
+import TimerDisplay from './Components/TimerDisplay.jsx';
 
 
 function App() {
 
   return (
     <>
-      <Stack> 
-        <p className="break-label">Break Length</p>
-        <IconButton className="break-decrement">
-          <ArrowDownwardIcon></ArrowDownwardIcon>
-        </IconButton>
+      <Stack direction="row" gap={5}>
+        <BreakDisplay></BreakDisplay>
+        <SessionDisplay></SessionDisplay>
       </Stack>
-      <Stack>
-        <p className="session-label">Session Label</p>
-      </Stack>
+      <TimerDisplay></TimerDisplay>
+
     </>
   )
 }
