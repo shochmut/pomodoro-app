@@ -5,28 +5,23 @@ import IconButton from '@mui/material/IconButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import Box from '@mui/material/Box';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment, incrementByAmount, selectTime } from './timerSlice';
+
 const SessionDisplay = () => {
-  const [sessionLength, setSessionLength] = useState(25);
-
-  const handleIncrement = () => {
-    setSessionLength(sessionLength+1);
-  }
-
-  const handleDecrement = () => {
-    setSessionLength(sessionLength-1);
-  }
+  const session = useSelector(selectTime)
 
   return (
     <Stack>
       <p className="session-label">Session Length</p>
       <Stack direction="row">
-        <IconButton className="session-increment" color="secondary" onClick={handleIncrement}>
+        <IconButton className="session-increment" color="secondary" onClick={useDispatch(increment())}>
           <ArrowUpwardIcon></ArrowUpwardIcon>
         </IconButton>
         <Box>
-          <p className="session-length">{sessionLength}</p>
+          <p className="session-length">{session}</p>
         </Box>
-        <IconButton className="session-decrement" color="secondary" onClick={handleDecrement}>
+        <IconButton className="session-decrement" color="secondary" onClick={useDispatch(decrement())}>
           <ArrowDownwardIcon></ArrowDownwardIcon>
         </IconButton>
       </Stack>

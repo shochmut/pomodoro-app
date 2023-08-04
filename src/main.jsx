@@ -4,8 +4,8 @@ import App from './App.jsx'
 import './index.css'
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import rootReducer from './reducers'
+import store from './store'
+
 
 const store = createStore(rootReducer)
 
