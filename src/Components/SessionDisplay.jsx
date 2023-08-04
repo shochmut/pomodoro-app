@@ -6,7 +6,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import Box from '@mui/material/Box';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment, incrementByAmount, selectTime } from './timerSlice';
+import { decrement, increment, incrementByAmount, selectTime } from './TimerDisplay/timerSlice';
 
 const SessionDisplay = () => {
   const session = useSelector(selectTime)
