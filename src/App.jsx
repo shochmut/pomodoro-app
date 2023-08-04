@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import './App.css';
 import Stack from '@mui/material/Stack';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import IconButton from '@mui/material/IconButton';
 import BreakDisplay from "./Components/BreakDisplay.jsx";
 import SessionDisplay from './Components/SessionDisplay.jsx';
 import TimerDisplay from './Components/TimerDisplay/TimerDisplay.jsx';

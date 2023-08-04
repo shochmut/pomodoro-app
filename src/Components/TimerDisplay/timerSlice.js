@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const timerSlice = createSlice({
   name: 'timer',
   initialState: {
-    value: 20
+    value: 30,
   },
   reducers: {
-    increment: state => {
+    increment: (state) => {
       state.value += 1
     },
-    decrement: state => {
+    decrement: (state) => {
       state.value -= 1
     },
     incrementByAmount: (state, action) => {
@@ -19,5 +19,5 @@ export const timerSlice = createSlice({
 })
 
 export const { increment, decrement, incrementByAmount } = timerSlice.actions
-export const selectTime = state => state.timer.value  //selector function definition
+export const selectTime = (state) => state.timer.value  //selector function definition
 export default timerSlice.reducer
