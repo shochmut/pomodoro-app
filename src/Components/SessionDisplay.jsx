@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment, incrementByAmount, selectTime, } from './TimerDisplay/timerSlice';
+import { decrement, increment, reset, selectTime, } from './TimerDisplay/timerSlice';
 
 const SessionDisplay = () => {
   const session = useSelector(selectTime)
