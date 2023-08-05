@@ -10,23 +10,20 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, reset, selectTime } from './timerSlice';
+import { toggleOnOff, toggleOff, selectToggle } from './toggleSlice';
 
 const TimerDisplay = () => {
   const session = useSelector(selectTime);
   const dispatch = useDispatch();
-  const [isActive, setIsActive] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(session);
-
-  const toggle = () => {
-    setIsActive(!isActive);
-  }
+  const isActive = useSelector(selectToggle);
 
   const handleReset = () => {
-    setIsActive(false);
-    dispatch(reset({payload: 25}))
+    dispatch(toggleOff());
+    dispatch(reset());
     setSeconds(0);
-    setMinutes(session);
+    setMinutes(25);
   }
 
   useEffect(() => {
@@ -48,15 +45,19 @@ const TimerDisplay = () => {
       };
   });
 
+  useEffect(() => {
+    setMinutes(session)
+  }, [session])
+
   return (
     <Stack>
       <p className="timer-label">Session</p>
       <p className="time-left">{minutes}:{(seconds.toString()).padStart(2, '0')}</p>
       <Stack direction="row" justifyContent="center">
-        <IconButton className="start_stop" color="success" onClick={() => toggle()}>
+        <IconButton className="start_stop" color="success" onClick={() => dispatch(toggleOnOff())}>
           <PlayCircleFilledIcon></PlayCircleFilledIcon>
         </IconButton>
-        <IconButton className="pause" color="primary" onClick={() => setIsActive(false)}>
+        <IconButton className="pause" color="primary" onClick={() => dispatch(toggleOff())}>
           <PauseCircleFilledIcon></PauseCircleFilledIcon>
         </IconButton>
         <IconButton className="reset" color="secondary" onClick={() => handleReset()}>
