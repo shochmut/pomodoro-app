@@ -4,17 +4,13 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import IconButton from '@mui/material/IconButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import Box from '@mui/material/Box';
+import { incrementBreak, decrementBreak, resetBreak, selectBreak } from './breakSlice';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 const BreakDisplay = () => {
-  const [breakLength, setBreakLength] = useState(5);
-
-  const handleIncrement = () => {
-    setBreakLength(breakLength + 1);
-  };
-
-  const handleDecrement = () => {
-    setBreakLength(breakLength - 1);
-  };
+  const breakTime = useSelector(selectBreak);
+  const dispatch = useDispatch();
 
   return (
     <Stack>
@@ -23,17 +19,17 @@ const BreakDisplay = () => {
         <IconButton
           className="break-increment"
           color="secondary"
-          onClick={handleIncrement}
+          onClick={() => dispatch(incrementBreak())}
         >
           <ArrowUpwardIcon></ArrowUpwardIcon>
         </IconButton>
         <Box>
-          <p className="break-length">{breakLength}</p>
+          <p className="break-length">{breakTime}</p>
         </Box>
         <IconButton
           className="break-decrement"
           color="secondary"
-          onClick={handleDecrement}
+          onClick={() => dispatch(decrementBreak())}
         >
           <ArrowDownwardIcon></ArrowDownwardIcon>
         </IconButton>

@@ -11,6 +11,8 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, reset, selectTime } from './timerSlice';
 import { toggleOnOff, toggleOff, selectToggle } from './toggleSlice';
+import { resetBreak } from '../breakSlice'
+
 
 const TimerDisplay = () => {
   const session = useSelector(selectTime);
@@ -22,6 +24,7 @@ const TimerDisplay = () => {
   const handleReset = () => {
     dispatch(toggleOff());
     dispatch(reset());
+    dispatch(resetBreak());
     setSeconds(0);
     setMinutes(25);
   }
