@@ -7,10 +7,14 @@ export const timerSlice = createSlice({
   },
   reducers: {
     increment: (state) => {
-      state.value += 1
+      if (state.value < 60) {
+        state.value += 1
+      }
     },
     decrement: (state) => {
-      state.value -= 1
+      if (state.value > 1) {
+        state.value -= 1
+      }
     },
     reset: (state, action) => {
       state.value = 25

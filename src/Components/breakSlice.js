@@ -7,10 +7,14 @@ export const breakSlice = createSlice({
   },
   reducers: {
     incrementBreak: (state) => {
-      state.value += 1
+      if (state.value < 60) {
+        state.value += 1
+      }
     },
     decrementBreak: (state) => {
-      state.value -= 1
+      if (state.value > 1) {
+        state.value -= 1
+      }
     },
     resetBreak: (state, action) => {
       state.value = 5

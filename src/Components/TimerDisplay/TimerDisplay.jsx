@@ -11,14 +11,16 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, reset, selectTime } from './timerSlice';
 import { toggleOnOff, toggleOff, selectToggle } from './toggleSlice';
-import { resetBreak } from '../breakSlice'
+import { resetBreak, selectBreak } from '../breakSlice'
 
 
 const TimerDisplay = () => {
   const session = useSelector(selectTime);
+  const breakTime = useSelector(selectBreak);
   const dispatch = useDispatch();
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(session);
+  const [sessionCompleted, setSessionCompleted] = useState(false);
   const isActive = useSelector(selectToggle);
 
   const handleReset = () => {
@@ -29,6 +31,25 @@ const TimerDisplay = () => {
     setMinutes(25);
   }
 
+  const breakSession = () => {
+    setSeconds(0)
+    setMinutes(breakTime)
+    let breakInterval = setInterval(() => {
+      if (isActive && seconds>0) {
+        setSeconds(seconds-1);
+      }
+      if (isActive && seconds===0) {
+        if (minutes===0) {
+          clearInterval(breakInterval)
+          return
+        } else {
+          setMinutes(minutes-1);
+          setSeconds(59);
+        }
+      }
+    }, 200)
+  };
+
   useEffect(() => {
     let newInterval = setInterval(() => {
       if (isActive && seconds>0) {
@@ -37,12 +58,20 @@ const TimerDisplay = () => {
       if (isActive && seconds===0) {
         if (minutes===0) {
           clearInterval(newInterval)
+          if (sessionCompleted = true) {
+            return clearInterval(newInterval)
+          }
+          else {
+            setSeconds(0)
+            setMinutes(breakTime) 
+            setSessionCompleted(true)
+          }
         } else {
           setMinutes(minutes-1);
           setSeconds(59);
           }
         }
-      }, 1000)
+      }, 100)
       return () => {
         clearInterval(newInterval);
       };
@@ -55,7 +84,7 @@ const TimerDisplay = () => {
   return (
     <Stack>
       <p className="timer-label">Session</p>
-      <p className="time-left">{minutes}:{(seconds.toString()).padStart(2, '0')}</p>
+      <p className="time-left">{(minutes.toString()).padStart(2, '0')}:{(seconds.toString()).padStart(2, '0')}</p>
       <Stack direction="row" justifyContent="center">
         <IconButton className="start_stop" color="success" onClick={() => dispatch(toggleOnOff())}>
           <PlayCircleFilledIcon></PlayCircleFilledIcon>
