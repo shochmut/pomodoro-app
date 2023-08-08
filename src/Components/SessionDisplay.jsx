@@ -4,7 +4,6 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import IconButton from '@mui/material/IconButton';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import Box from '@mui/material/Box';
-import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, reset, selectTime, } from './TimerDisplay/timerSlice';

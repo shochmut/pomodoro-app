@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import IconButton from '@mui/material/IconButton';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import Box from '@mui/material/Box';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, reset, selectTime } from './timerSlice';
 import { toggleOnOff, toggleOff, selectToggle } from './toggleSlice';
