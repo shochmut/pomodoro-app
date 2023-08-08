@@ -64,6 +64,7 @@ const TimerDisplay = () => {
         ? <p className="timer-label">Break</p>
         :  <p className="timer-label">Session</p>
       }
+      <audio
       <p className="time-left">{(minutes.toString()).padStart(2, '0')}:{(seconds.toString()).padStart(2, '0')}</p>
       <Stack direction="row" justifyContent="center">
         <IconButton className="start_stop" color="success" onClick={() => dispatch(toggleOnOff())}>
