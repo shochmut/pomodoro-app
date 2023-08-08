@@ -22,6 +22,7 @@ const TimerDisplay = () => {
   const [minutes, setMinutes] = useState(session);
   const [sessionCompleted, setSessionCompleted] = useState(false);
   const isActive = useSelector(selectToggle);
+  const audio = new Audio('https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav'); 
 
   const handleReset = () => {
     dispatch(toggleOff());
@@ -30,6 +31,8 @@ const TimerDisplay = () => {
     setSeconds(0);
     setMinutes(25);
     setSessionCompleted(false);
+    audio.pause()
+    audio.currentTime = 0;
   }
 
   useEffect(() => {
@@ -39,10 +42,11 @@ const TimerDisplay = () => {
       }
       if (isActive && seconds===0) {
         if (minutes===0) {
-          clearInterval(newInterval)
-          setSeconds(0)
-          setMinutes(breakTime) 
-          setSessionCompleted(!sessionCompleted)
+          clearInterval(newInterval);
+          setSeconds(0);
+          setMinutes(breakTime) ;
+          setSessionCompleted(!sessionCompleted);
+          audio.play();
         } else {
           setMinutes(minutes-1);
           setSeconds(59);
@@ -61,10 +65,9 @@ const TimerDisplay = () => {
   return (
     <Stack>
       {sessionCompleted
-        ? <p className="timer-label">Break</p>
+        ? <p className="timer-label">Break</p> 
         :  <p className="timer-label">Session</p>
       }
-      <audio
       <p className="time-left">{(minutes.toString()).padStart(2, '0')}:{(seconds.toString()).padStart(2, '0')}</p>
       <Stack direction="row" justifyContent="center">
         <IconButton className="start_stop" color="success" onClick={() => dispatch(toggleOnOff())}>
