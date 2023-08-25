@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment, reset, selectTime } from './timerSlice';
 import { toggleOnOff, toggleOff, selectToggle } from './toggleSlice';
@@ -64,7 +68,26 @@ const TimerDisplay = () => {
         ? <p className="timer-label">Break</p> 
         :  <p className="timer-label">Session</p>
       }
-      <p className="time-left">{(minutes.toString()).padStart(2, '0')}:{(seconds.toString()).padStart(2, '0')}</p>
+      <Box sx={{ position: 'relative', display: 'inline-flex', alignItems: "center", justifyContent: "center", padding: 1}}>
+        <CircularProgress variant="determinate" value={100-((25-minutes)/25*100)} size={80} />
+        <Box
+          sx={{
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography className="time-left" variant="h6" component="div" >
+            {(minutes.toString()).padStart(2, '0')}:{(seconds.toString()).padStart(2, '0')}
+          </Typography>
+        </Box>
+      </Box>
+      
       <Stack direction="row" justifyContent="center">
         <IconButton className="start_stop" color="success" onClick={() => dispatch(toggleOnOff())}>
           <PlayCircleFilledIcon></PlayCircleFilledIcon>
