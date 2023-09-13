@@ -65,11 +65,15 @@ const TimerDisplay = () => {
   return (
     <Stack>
       {sessionCompleted
-        ? <p className="timer-label">Break</p> 
+        ? <p className="timer-label">Break</p>
         :  <p className="timer-label">Session</p>
       }
       <Box sx={{ position: 'relative', display: 'inline-flex', alignItems: "center", justifyContent: "center", padding: 1}}>
-        <CircularProgress variant="determinate" value={100-((25-minutes)/25*100)} size={80} />
+        {sessionCompleted
+          ? <CircularProgress variant="determinate" value={(-((breakTime-minutes)*60-seconds)/(breakTime*60)*100)} size={80} />
+          : <CircularProgress variant="determinate" value={100-(((session-minutes)*60-seconds)/(session*60)*100)} size={80} />
+
+        }
         <Box
           sx={{
             top: 0,
