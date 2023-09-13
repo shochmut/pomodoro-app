@@ -42,11 +42,20 @@ const TimerDisplay = () => {
       }
       if (isActive && seconds===0) {
         if (minutes===0) {
-          clearInterval(newInterval);
-          setSeconds(0);
-          setMinutes(breakTime) ;
-          setSessionCompleted(!sessionCompleted);
-          audio.play();
+          if (!sessionCompleted) {
+            clearInterval(newInterval);
+            setSeconds(0);
+            setMinutes(breakTime) ;
+            setSessionCompleted(!sessionCompleted);
+            audio.play();
+          }
+          else {
+            clearInterval(newInterval);
+            setSeconds(0);
+            setMinutes(session) ;
+            setSessionCompleted(!sessionCompleted);
+            audio.play();
+          }
         } else {
           setMinutes(minutes-1);
           setSeconds(59);
@@ -72,7 +81,6 @@ const TimerDisplay = () => {
         {sessionCompleted
           ? <CircularProgress variant="determinate" value={(-((breakTime-minutes)*60-seconds)/(breakTime*60)*100)} size={80} />
           : <CircularProgress variant="determinate" value={100-(((session-minutes)*60-seconds)/(session*60)*100)} size={80} />
-
         }
         <Box
           sx={{
