@@ -9,6 +9,7 @@ function App() {
 
   return (
     <>
+      <h1>Pomodoro</h1>
       <Stack direction="row" gap={5}>
         <BreakDisplay></BreakDisplay>
         <SessionDisplay></SessionDisplay>
